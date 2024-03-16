@@ -3,7 +3,7 @@ name: Insert Data into MySQL
 on:
   push:
     branches:
-      - main
+      - examen-parcial-1
   commit: # Agregamos un nuevo evento para commits
 
 jobs:
