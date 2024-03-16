@@ -1,13 +1,12 @@
-name: Insert Data into MySQL
+name: Unit Tests
 
 on:
   push:
     branches:
       - examen-parcial-1
-  commit: # Agregamos un nuevo evento para commits
 
 jobs:
-  insert-data:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,14 +18,8 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install MySQL client
-        run: sudo apt-get install mysql-client -y
+      - name: Install dependencies
+        run: npm install
 
-      - name: Insert data into MySQL
-        env:
-          MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
-          MYSQL_USER: ${{ secrets.MYSQL_USER }}
-          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-          MYSQL_DATABASE: 'my_database'
-        run: |
-          mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE -e "INSERT INTO my_table (column1, column2) VALUES ('value1', 'value2')"
+      - name: Run tests
+        run: npm test
